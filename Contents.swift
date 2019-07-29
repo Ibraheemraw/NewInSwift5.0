@@ -1,10 +1,9 @@
 import UIKit
 
 // What's new in Swift 5.0
+// Swift Evolution (Resource) where users are able to update the swift language
+// Extended String Delimiters Link: https://docs.swift.org/swift-book/LanguageGuide/StringsAndCharacters.html
 // Raw Strings
-// Swift Evolution (Resource)
-// Extended String Delimiters
-// Link: https://docs.swift.org/swift-book/LanguageGuide/StringsAndCharacters.html
 // print hello with ""
 let h = "hello"
 print("Old way: ", "\"\(h)\"", "Uses backslash") // old
