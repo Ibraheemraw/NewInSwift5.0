@@ -134,3 +134,91 @@ print(validGrades)
 let average = validGrades.values.reduce(0,+) / validGrades.values.count
 print(average)
 
+// String Interpalation Part 2
+//========================================================================
+struct Person {
+    let name:String
+    let age:Int
+    let dateAdded: Date
+}
+
+let jiang = Person.init(name: "catman", age: 29, dateAdded: Date())
+print("User Details: \(jiang)")
+
+extension String.StringInterpolation {
+    mutating func appendInterpolation(_ value: Person){
+        appendLiteral("\(value.name) is \(value.age) years old")
+    }
+    mutating func appendInterpolation(_ value: Person, dateFormattingStyle: DateFormatter.Style){
+        let dateFormater = DateFormatter()
+        dateFormater.dateStyle = dateFormattingStyle
+        let dateStr = dateFormater.string(from: value.dateAdded)
+        appendLiteral("\(value.name) was added to the datebase on \(dateStr)")
+    }
+}
+print("Person details using custom interpolation: \(jiang)")
+print("Person detail update \(jiang, dateFormattingStyle: .long)")
+
+
+func reverseWords(_ s: String) -> String {
+   let arr = s.components(separatedBy: " ")
+    var rw = String()
+    for word in arr {
+        for letter in word {
+            rw = String(letter) + rw
+        }
+    }
+    return rw
+}
+
+let word = reverseWords("Let's take LeetCode contest")
+print(word)
+
+/*
+ Write a function that takes two sorted arrays and merges them into a single array.
+ 
+ input: [1, 3, 6, 9, 11] and [5, 8, 21, 25]
+ 
+ output: [1, 3, 5, 6, 8, 9, 11, 21, 25]
+ */
+
+func combineArr(arr1:[Int], arr2:[Int])->[Int]{
+//    var combinedArr = [Int]()
+//    combinedArr = arr1 + arr2
+//    sortArr(combinedArr)
+//    return combinedArr
+    var leftIndex = 0
+    var rightIndex = 0
+    var results = [Int]()
+    
+    while leftIndex < arr1.count && rightIndex < arr2.count{
+        let leftElement = arr1[leftIndex]
+        let rightElement = arr2[rightIndex]
+        if leftElement < rightElement { // add left element to results arr first
+            results.append(leftElement)
+            leftIndex += 1
+        } else if leftElement > rightElement { // add right first
+            results.append(rightElement)
+            rightIndex += 1
+        } else { // add them both to the results
+            results.append(leftElement)
+            leftIndex += 1
+            results.append(rightElement)
+            rightIndex += 1
+        }
+    }
+    if leftIndex < arr1.count {
+        results.append(contentsOf: arr1[leftIndex...])
+    }
+    if rightIndex < arr2.count {
+        results.append(contentsOf: arr2[rightIndex...])
+    }
+    return results
+}
+
+
+
+let a = [1, 3, 6, 9, 11]
+let b = [5, 8, 21, 25]
+let results = combineArr(arr1: a, arr2: b)
+print(results)
